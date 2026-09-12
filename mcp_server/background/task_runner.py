@@ -35,11 +35,11 @@ try:
     app_dir = str(get_app_dir())
     global_env = os.path.join(app_dir, ".env")
     if os.path.exists(global_env):
-        load_dotenv(global_env)
+        load_dotenv(global_env, override=True)
     else:
-        load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
+        load_dotenv(os.path.join(PROJECT_ROOT, ".env"), override=True)
 except Exception:
-    load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
+    load_dotenv(os.path.join(PROJECT_ROOT, ".env"), override=True)
 
 from artemis.runtime import trace_store
 from mcp_server.notifiers import notify

@@ -510,6 +510,12 @@ class TaskQueueService:
 
         test_name = f"web_{int(time.time())}_{run_key[:8]}"
         env = os.environ.copy()
+        from dotenv import dotenv_values
+        _env_file = WORKSPACE_ROOT / ".env"
+        if _env_file.exists():
+            for _k, _v in dotenv_values(_env_file).items():
+                if _v:
+                    env[_k] = str(_v)
         pythonpath_parts = [
             str(WORKSPACE_ROOT),
             str(WORKSPACE_ROOT / "apps" / "admin_console"),

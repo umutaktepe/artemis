@@ -473,6 +473,12 @@ def mobile_run_task(
             cmd.extend(["--explorer-pro-mode", explorer_mode])
 
         env = os.environ.copy()
+        from dotenv import dotenv_values
+        _env_file = os.path.join(project_root, ".env")
+        if os.path.exists(_env_file):
+            for _k, _v in dotenv_values(_env_file).items():
+                if _v:
+                    env[_k] = str(_v)
         env["ARTEMIS_SESSION_ID"] = trace_id
         env["ARTEMIS_TASK_INGRESS"] = "mcp"
         if device_serial:

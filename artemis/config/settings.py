@@ -48,10 +48,10 @@ from artemis.utils.logger import get_logger
 
 # Installed wheels load .env from the user directory, outside site-packages.
 _canonical_env = get_env_file()
-load_dotenv(dotenv_path=_canonical_env, verbose=True)
+load_dotenv(dotenv_path=_canonical_env, verbose=True, override=True)
 _global_env = GLOBAL_APP_DIR / ".env"
 if _global_env.exists() and _global_env.resolve() != _canonical_env.resolve():
-    load_dotenv(dotenv_path=_global_env, verbose=True)
+    load_dotenv(dotenv_path=_global_env, verbose=True, override=True)
 
 logger = get_logger(__name__)
 
